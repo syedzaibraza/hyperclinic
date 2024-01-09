@@ -144,6 +144,79 @@ export const Specialty = [
   },
 ];
 
+export const SPwithID = [
+  {
+    id: "6597ff56af05d9477c3adcdb",
+    name: "Pulmonology",
+  },
+  {
+    id: "6597ff56af05d9477c3adcdc",
+    name: "Endocrinology",
+  },
+  {
+    id: "6597ff56af05d9477c3adcdd",
+
+    name: "Cardiology",
+  },
+  {
+    id: "6597ff56af05d9477c3adcde",
+
+    name: "Psychiatry",
+  },
+  {
+    id: "6597ff56af05d9477c3adcdf",
+    name: "Neurology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce0",
+    name: "Gastroenterology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce1",
+    name: "Allergy and Immunology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce2",
+    name: "Rheumatology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce3",
+    name: "Hematology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce4",
+    name: "Orthopedics",
+  },
+  {
+    id: "6597ff56af05d9477c3adce5",
+    name: "Urology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce6",
+    name: "Ophthalmology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce7",
+    name: "Dermatology",
+  },
+  {
+    id: "6597ff56af05d9477c3adce8",
+    name: "General Practice",
+  },
+  {
+    id: "6597ff56af05d9477c3adce9",
+    name: "Infectious Disease",
+  },
+  {
+    id: "6597ff56af05d9477c3adcea",
+    name: "Vascular Surgery",
+  },
+  {
+    id: "6597ff56af05d9477c3adceb",
+    name: "Otolaryngology",
+  },
+];
+
 export const Days = [
   { value: "Monday", label: "Monday" },
   { value: "Tuesday", label: "Tuesday" },

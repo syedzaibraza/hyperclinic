@@ -1,5 +1,25 @@
 import Link from "next/link";
 import { Fragment } from "react";
+import useLogout from "../../utils/logOut";
+
+export const Login = () => {
+  const logOut = useLogout();
+
+  return (
+    <Fragment>
+      <li>
+        <Link href="/profile">
+          <a>Profile</a>
+        </Link>
+      </li>
+      <li>
+        <div className="logoutbutton" onClick={logOut}>
+          Logout
+        </div>
+      </li>
+    </Fragment>
+  );
+};
 
 export const Home = () => (
   <Fragment>
@@ -59,6 +79,30 @@ export const Doctor = () => (
     </li>
   </Fragment>
 );
+// import Cookies from "js-cookie";
+// import { useRouter } from "next/router";
+
+// const logOut = () => {
+//   localStorage.removeItem("userInfo");
+//   Cookies.remove("token");
+//   dispatch({
+//     type: "set",
+//     isLoggedIn: false,
+//     userInfo: null,
+//   });
+// };
+// export const Login = () => (
+//   <Fragment>
+//     <li>
+//       <Link href="/profile">Profile</Link>
+//     </li>
+//     <li>
+//       <Link href={"/"} onClick={() => logOut}>
+//         Logout
+//       </Link>
+//     </li>
+//   </Fragment>
+// );
 export const Blog = () => (
   <Fragment>
     <li>

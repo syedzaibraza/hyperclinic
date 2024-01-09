@@ -1,8 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageBanner from "../src/components/PageBanner";
 import Layouts from "../src/layouts/Layouts";
+import { withAuth } from "../redux/useAuth";
+import Select from "react-select";
+import { ApiGet, ApiPost } from "./api/hello";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    borderRadius: "50px",
+    border: "none",
+    height: "65px",
+    minHeight: "65px",
+    boxShadow: "none", // Remove focus shadow
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    height: "65px",
+    padding: "0 16px",
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: "0px",
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    height: "65px",
+  }),
+  option: (provided) => ({
+    ...provided,
+    // borderRadius: "50px",
+  }),
+  // Add more custom styles if needed for other parts of the Select
+};
 
 const Appointments = () => {
+  const [state, setState] = useState();
+  const { userInfo } = useSelector((state) => state);
+  const [freeSlots, setFreeSlots] = useState([]);
+  const [credentials, setCredentials] = useState({
+    bookingWith: "",
+    date: "",
+    timeSlot: "",
+  });
+  useEffect(() => {
+    GetDoctors();
+  }, []);
+
+  const GetDoctors = () => {
+    ApiGet("/user/doctors")
+      .then((res) => {
+        setState(res.data);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      ...credentials,
+      user: userInfo?._id,
+    };
+    ApiPost("/bookings/create", data)
+      .then((res) => {
+        toast.success("Appointment Created");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
+  const timeOptions = freeSlots
+    ? freeSlots.map((item) => ({
+        value: item,
+        label: item,
+      }))
+    : [];
+
   return (
     <Layouts footer={2}>
       <PageBanner title={"Appointment"} />
@@ -11,7 +88,10 @@ const Appointments = () => {
           <div className="appointment-form-two style-two">
             <div
               className="appointment-image"
-              style={{ backgroundImage: "url(assets/img/appointment/03.jpg)" }}
+              style={{
+                backgroundImage:
+                  "url(https://seeva.vercel.app/assets/img/appointment/03.jpg)",
+              }}
             ></div>
             <div className="form-wrap">
               <div className="section-heading mb-50">
@@ -20,49 +100,78 @@ const Appointments = () => {
                   Fill-up The From to Get Our Medical Services{" "}
                 </h2>
               </div>
-              <form onSubmit={(e) => e.preventDefault()} action="#">
+              <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="input-field">
-                      <input type="text" placeholder="Your Full Name" />
+                      <Select
+                        styles={customStyles}
+                        options={state?.map((item) => ({
+                          value: item?._id,
+                          label: item?.name,
+                        }))}
+                        onChange={(selectedOption) =>
+                          setCredentials((prevState) => ({
+                            ...prevState,
+                            bookingWith: selectedOption?.value,
+                          }))
+                        }
+                        placeholder="Select Doctor"
+                      />
+                    </div>
+                  </div>
+                  {/*  <div className="col-md-6">
+                    <div className="input-field">
+                       <Select
+                        options={appointmentOptions}
+                        onChange={(selectedOption) =>
+                          setAppointmentType(selectedOption)
+                        }
+                      /> 
+                    </div>
+                  </div>*/}
+                  <div className="col-md-6">
+                    <div className="input-field">
+                      <input
+                        type="date"
+                        value={credentials?.date}
+                        defaultValue={credentials?.date}
+                        onChange={(e) => {
+                          if (credentials.bookingWith === "") {
+                            toast.error("Please Select Doctor First");
+                            return;
+                          } else {
+                            setCredentials((prevState) => ({
+                              ...prevState,
+                              date: e.target.value,
+                            }));
+                            ApiPost("/bookings/availableSlots", {
+                              doctor: credentials.bookingWith,
+                              date: e.target.value,
+                            }).then((res) => {
+                              setFreeSlots(res.data.freeSlots);
+                            });
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="input-field">
-                      <input type="email" placeholder="Email Address" />
+                      <Select
+                        styles={customStyles}
+                        options={timeOptions}
+                        onChange={(selectedOption) =>
+                          setCredentials((prevState) => ({
+                            ...prevState,
+                            timeSlot: selectedOption?.value,
+                          }))
+                        }
+                        placeholder="Select Time"
+                      />
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="input-field">
-                      <select>
-                        <option value="1" selected disabled>
-                          Choose Doctors
-                        </option>
-                        <option value="2">Doctor One</option>
-                        <option value="3">Doctor Two</option>
-                        <option value="4">Doctor Three</option>
-                        <option value="5">Doctor Four</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="input-field">
-                      <input type="date" />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="input-field">
-                      <select>
-                        <option value="1" selected disabled>
-                          Services Category
-                        </option>
-                        <option value="2">Service One</option>
-                        <option value="3">Service Two</option>
-                        <option value="4">Service Three</option>
-                        <option value="5">Service Four</option>
-                      </select>
-                    </div>
-                  </div>
+
                   <div className="col-md-6">
                     <div className="input-field">
                       <button type="submit" className="template-btn">
@@ -79,7 +188,7 @@ const Appointments = () => {
       {/* <!--====== Appointment Section End ======--> */}
 
       {/* <!--====== Skill Section Start ======--> */}
-      <section className="skill-section section-gap border-top-primary">
+      {/* <section className="skill-section section-gap border-top-primary">
         <div className="container">
           <div className="row justify-content-center justify-content-lg-between align-items-center">
             <div className="col-lg-6 col-md-10">
@@ -173,8 +282,8 @@ const Appointments = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </Layouts>
   );
 };
-export default Appointments;
+export default withAuth(Appointments);

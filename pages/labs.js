@@ -119,7 +119,7 @@ const Service = () => {
         </div>
       </section>
 
-      <section className="appointment-section">
+      {/* <section className="appointment-section">
         <div className="appointment-form-three bg-color-secondary">
           <div
             className="appointment-image"
@@ -181,7 +181,7 @@ const Service = () => {
             </form>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!--====== Appointment Section End ======--> */}
 
       {/* <!--====== Feature Section Start ======--> */}

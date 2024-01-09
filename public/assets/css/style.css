@@ -3622,7 +3622,7 @@ button {
 }
 
 .doctor-details-wrapper .doctor-info-box .doctor-description {
-	padding: 80px 70px;
+	padding: 35px 70px;
 	background-color: #f2f8ff;
 }
 
@@ -3737,7 +3737,7 @@ button {
 }
 
 .doctor-details-wrapper .working-hour-table {
-	padding: 60px;
+	padding: 24px;
 	border: 1px solid var(--color-primary-10);
 }
 
@@ -10136,10 +10136,10 @@ button {
 }
 
 /*======= Footer =======*/
-.template-footer {
+/* .template-footer {
 	position: relative;
 	z-index: 1;
-}
+} */
 
 .template-footer .footer-widgets {
 	padding-top: 80px;
@@ -10411,7 +10411,7 @@ button {
 }
 
 .template-footer.have-cta-boxes-two .footer-inner {
-	padding-top: 0px;
+	padding-top: 120px;
 }
 
 .back-to-top {
@@ -10451,3 +10451,69 @@ button {
 	color: var(--color-white);
 }
 /*# sourceMappingURL=style.css.map */
+
+.logoutbutton{
+	font-size: 15px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.4;
+	cursor: pointer;
+	text-wrap: nowrap;
+}
+.logoutbutton:hover{
+	background-color: #499afa;
+	color:white
+}
+
+.booking-list {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding-top: 20px;
+  }
+  
+  .booking-card {
+	background-color: #f9f9f9;
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+	padding: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .booking-card .booking-details > * {
+	margin: 5px 0;
+  }
+  
+  .booking-card .booking-details .booking-date {
+	color: #2c3e50;
+	font-size: 1.2rem;
+  }
+  
+  .booking-card .booking-details .booking-time {
+	color: #34495e;
+  }
+  
+  .booking-card .booking-details .booking-with,
+  .booking-card .booking-details .booking-created {
+	color: #7f8c8d;
+	font-size: 0.9rem;
+  }
+  
+  .cancel-booking-btn {
+	background-color: #e74c3c;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .cancel-booking-btn:hover {
+	background-color: #c0392b;
+  }
+  
+  

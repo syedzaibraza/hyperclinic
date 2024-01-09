@@ -1,11 +1,29 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageBanner from "../src/components/PageBanner";
 import Layouts from "../src/layouts/Layouts";
+import { ApiGet } from "./api/hello";
+import { toast } from "react-toastify";
 
 const ServiceTwo = () => {
+  const [services, setServices] = useState([]);
+  console.log("services", services);
+
+  useEffect(() => {
+    GetCategories();
+  }, []);
+
+  const GetCategories = () => {
+    ApiGet("/categories")
+      .then((res) => {
+        setServices(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <Layouts footer={2}>
+    <Layouts footer={1}>
       <PageBanner title={"Our Services"} pageName="Services" />
       <section className="services-area section-gap-top-less bg-color-grey">
         <div className="container">
@@ -232,7 +250,7 @@ const ServiceTwo = () => {
       {/* <!--====== Service Area End ======--> */}
 
       {/* <!--====== Big Tagline Start ======--> */}
-      <section className="big-tagline">
+      <section className="big-tagline mb-20">
         <div className="container-fluid">
           <h2 className="tagline">
             Learn better health outcomes, improve costs and increase
@@ -243,7 +261,7 @@ const ServiceTwo = () => {
       {/* <!--====== Big Tagline End ======--> */}
 
       {/* <!--====== Appointment Section Start ======--> */}
-      <section className="appointment-section section-gap">
+      {/* <section className="appointment-section section-gap">
         <div className="container">
           <div className="appointment-form-two">
             <div className="form-wrap">
@@ -305,7 +323,7 @@ const ServiceTwo = () => {
             ></div>
           </div>
         </div>
-      </section>
+      </section> */}
     </Layouts>
   );
 };

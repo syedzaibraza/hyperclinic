@@ -3,13 +3,17 @@ import Layouts from "../src/layouts/Layouts";
 import PageBanner from "../src/components/PageBanner";
 import Link from "next/link";
 import { ApiPost } from "./api/hello";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const TabSwitcher = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-
+  const dispatch = useDispatch();
+  const router = useRouter();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCredentials((prevState) => ({
@@ -20,9 +24,18 @@ const TabSwitcher = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ApiPost("/auth/login", credentials);
+    ApiPost("/auth/login", credentials)
+      .then((res) => {
+        toast.success("Login Successfull");
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
+        dispatch({ type: "set", isLoggedIn: true });
+        router.push("/");
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.error || "Login Failed");
+        console.log(err.response.data.error);
+      });
   };
-  const [activeTab, setActiveTab] = useState("patient");
 
   return (
     <Layouts footer={2}>

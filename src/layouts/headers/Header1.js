@@ -1,12 +1,41 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import { Blog, Doctor, Home, Pages, Services, Shop } from "./Menu";
+import React, { useEffect, useState } from "react";
+import { Blog, Doctor, Home, Login, Pages, Services, Shop } from "./Menu";
 import MobileMenu from "./MobileMenu";
 import SlidePanel from "./SlidePanel";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { ApiGet } from "../../../pages/api/hello";
+import { toast } from "react-toastify";
 
 const Header1 = ({ headerTopbar, position }) => {
   const [sidebarTrigger, setSidebarTrigger] = useState(false);
   const [mobileTrigger, setMobileTrigger] = useState(false);
+  const { isLoggedIn, userInfo } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const pathname = useRouter().pathname;
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      dispatch({
+        type: "set",
+        isLoggedIn: true,
+        userInfo: JSON.parse(userInfo),
+      });
+    }
+  }, [isLoggedIn]);
+  useEffect(() => {
+    GetDoctors();
+  }, []);
+  const GetDoctors = () => {
+    ApiGet("/user/doctors").then((res) => {
+      dispatch({
+        type: "set",
+        doctors: res.data,
+      });
+    });
+  };
   return (
     <header
       className={`template-header sticky-header header-one ${
@@ -71,131 +100,124 @@ const Header1 = ({ headerTopbar, position }) => {
           <div className="header-left">
             <div className="site-logo">
               <Link href="/">
-                <img src="assets/img/logo.png" alt="Seeva" />
+                <img
+                  src="https://seeva.vercel.app/assets/img/logo.png"
+                  alt="Seeva"
+                />
               </Link>
             </div>
             <nav className="site-menu menu-gap-left d-none d-xl-block">
               <ul className="primary-menu">
-                <li>
+                <li className={`${pathname === "/" && "active"} `}>
                   <Link href="/">
                     <a>
                       Home
-                      <span className="dd-trigger">
+                      {/* <span className="dd-trigger">
                         <i className="far fa-plus" />
-                      </span>
+                      </span> */}
                     </a>
                   </Link>
-                  <ul className="sub-menu">
+                  {/* <ul className="sub-menu">
                     <Home />
-                  </ul>
+                  </ul> */}
                 </li>
-                <li>
-                  <Link href="/labs">Labs</Link>
+                <li className={`${pathname === "/about" && "active"} `}>
+                  <Link href="/about">About</Link>
                 </li>
-                <li>
-                  <Link href="about">About</Link>
-                </li>
-                <li>
-                  <a href="#">
-                    Pages
-                    <span className="dd-trigger">
+
+                <li className={`${pathname === "/service-two" && "active"} `}>
+                  <Link href="/service-two">
+                    <a>
+                      Services
+                      {/* <span className="dd-trigger">
                       <i className="far fa-plus" />
-                    </span>
-                  </a>
-                  <ul className="sub-menu">
+                    </span> */}
+                    </a>
+                  </Link>
+                </li>
+                {/* <ul className="sub-menu">
                     <li>
-                      <Link href="service">
+                      <Link href="/service-two">
                         <a>
                           Services
-                          <span className="dd-trigger">
+                           <span className="dd-trigger">
                             <i className="far fa-plus" />
-                          </span>
+                          </span> 
                         </a>
                       </Link>
                       <ul className="sub-menu">
                         <Services />
-                      </ul>
+                      </ul> 
                     </li>
                     <Pages />
                   </ul>
+                </li> */}
+                <li className={`${pathname === "/labs" && "active"} `}>
+                  <Link href="/labs">Labs</Link>
                 </li>
-                <li>
+                <li className={`${pathname === "/doctor" && "active"} `}>
                   <Link href="/doctor">
-                    <a>
-                      Doctors
-                      <span className="dd-trigger">
-                        <i className="far fa-plus" />
-                      </span>
-                    </a>
+                    <a>Doctors</a>
                   </Link>
-                  <ul className="sub-menu">
-                    <Doctor />
-                  </ul>
                 </li>
-                <li>
-                  <Link href="blog-standard">
-                    <a>
-                      Blog
-                      <span className="dd-trigger">
-                        <i className="far fa-plus" />
-                      </span>
-                    </a>
-                  </Link>
-                  <ul className="sub-menu">
-                    <Blog />
-                  </ul>
+                <li className={`${pathname === "/contact" && "active"} `}>
+                  <Link href="/appointments">Appointments</Link>
                 </li>
-                <li>
-                  <Link href="/shop">
-                    <a>
-                      Shop
-                      <span className="dd-trigger">
-                        <i className="far fa-plus" />
-                      </span>
-                    </a>
-                  </Link>
-                  <ul className="sub-menu">
-                    <Shop />
-                  </ul>
-                </li>
-                <li>
+                <li className={`${pathname === "/contact" && "active"} `}>
                   <Link href="/contact">Contact</Link>
-                </li>
-                <li>
-                  <Link href="/login">
-                    <button
-                      className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
-                      data-wow-delay="0.3s"
-                    >
-                      Login
-                    </button>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/signup">
-                    <button
-                      className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
-                      data-wow-delay="0.3s"
-                    >
-                      SignUp
-                    </button>
-                  </Link>
                 </li>
               </ul>
             </nav>
+            <nav className="site-menu menu-gap-left d-none d-xl-block">
+              <ul className="primary-menu">
+                {isLoggedIn ? (
+                  <li>
+                    <Link href="/profile">
+                      <button
+                        className="template-btn text-center template-btn-primary mt-sm-30  wow fadeInRight"
+                        data-wow-delay="0.3s"
+                      >
+                        <i
+                          className="far fa-user"
+                          style={{ paddingRight: "8px" }}
+                        />{" "}
+                        {userInfo?.name}
+                      </button>
+                    </Link>
+                    <ul className="sub-menu">
+                      <Login />
+                    </ul>
+                  </li>
+                ) : (
+                  <>
+                    <li>
+                      <Link href="/login">
+                        <button
+                          className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
+                          data-wow-delay="0.3s"
+                        >
+                          Login
+                        </button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/signup">
+                        <button
+                          className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
+                          data-wow-delay="0.3s"
+                        >
+                          SignUp
+                        </button>
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </nav>
           </div>
+
           <div className="header-right">
             <ul className="extra-icons">
-              {/* <li className="d-none d-sm-block">
-                <div className="header-search-area">
-                  <form onSubmit={(e) => e.preventDefault()} action="#">
-                    <input type="search" placeholder="Search Here" />
-                    <button type="submit">
-                      <i className="far fa-search" />
-                    </button>
-                  </form>
-                </div>
-              </li> */}
               <li className="d-none d-xl-block">
                 <div
                   className="off-canvas-btn style-two"

@@ -4,6 +4,7 @@ import React from "react";
 import Slider from "react-slick";
 import Layouts from "../src/layouts/Layouts";
 import { testimonialOne } from "../src/sliderProps";
+import { useSelector } from "react-redux";
 
 const Counter = dynamic(() => import("../src/components/Counter"), {
   ssr: false,
@@ -26,12 +27,12 @@ const Index = () => {
                     Dolor sit amet consectetur adipiscing elitsedes eiusmod
                     tempor incididunt utlabore Lorem
                   </p>
-                  <Link href="/contact">
+                  <Link href="/symptoms-checker">
                     <a
                       className="template-btn wow fadeInUp"
                       data-wow-delay="0.5s"
                     >
-                      Make an Appointment <i className="far fa-plus" />
+                      Symptoms Checker <i className="far fa-search" />
                     </a>
                   </Link>
                 </div>
@@ -870,7 +871,7 @@ const Index = () => {
         </section>
         {/*====== Help Section End ======*/}
         {/*====== Partners Section Start ======*/}
-        <section className="partner-section section-gap bg-color-secondary section-map-overly">
+        {/* <section className="partner-section section-gap bg-color-secondary section-map-overly">
           <div className="container">
             <div className="section-heading heading-white text-center mb-50">
               <span className="span tagline">Our Trusted Partners</span>
@@ -919,10 +920,10 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Partners Section End ======*/}
         {/*====== Latest Blog Start ======*/}
-        <section className="latest-blog-section section-gap">
+        {/* <section className="latest-blog-section section-gap">
           <div className="container">
             <div className="row">
               <div className="col-lg-6 col-md-8">
@@ -1024,7 +1025,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Latest Blog End ======*/}
       </>
     </Layouts>

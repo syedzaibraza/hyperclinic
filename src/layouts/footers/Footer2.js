@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer2 = ({ noNewsletters }) => {
@@ -7,6 +8,64 @@ const Footer2 = ({ noNewsletters }) => {
         noNewsletters ? "" : "have-cta-boxes-two"
       }`}
     >
+      {!noNewsletters && (
+        <div className="cta-boxes-wrapper">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-1.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">
+                    Looking a Doctors For Health Care
+                  </h2>
+                  <Link href={"/doctor"}>
+                    <a className="template-btn template-btn-bordered">
+                      Find Doctor <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-2.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">Make Appointment Online (24/7)</h2>
+                  <Link href="/appointments">
+                    <a className="template-btn template-btn-bordered">
+                      Appointment <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-8">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-3.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">Innovative Labs For Tests</h2>
+                  <Link href="/labs">
+                    <a className="template-btn template-btn-bordered">
+                      Find Labs <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="footer-inner bg-color-primary">
         <div className="container">
           <div className="footer-widgets">

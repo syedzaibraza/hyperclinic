@@ -1,9 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layouts from "../src/layouts/Layouts";
 import PageBanner from "../src/components/PageBanner";
 import Link from "next/link";
 import Select from "react-select";
 import { Specialty, Days, Service, Slots } from "../src/utils/DataCreator";
+import { ApiGet, ApiPost } from "./api/hello";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    height: "65px",
+    minHeight: "65px",
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    height: "65px",
+    padding: "0 16px",
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: "0px",
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    height: "65px",
+  }),
+
+  // Add more custom styles if needed for other parts of the Select
+};
+
 const TabSwitcher = () => {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -19,7 +47,24 @@ const TabSwitcher = () => {
       service: [],
     },
   });
-  const [activeTab, setActiveTab] = useState("patient");
+  const [activeTab, setActiveTab] = useState("Patient");
+  const dispatch = useDispatch();
+  const [services, setServices] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    GetCategories();
+  }, []);
+
+  const GetCategories = () => {
+    ApiGet("/categories")
+      .then((res) => {
+        setServices(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -69,6 +114,7 @@ const TabSwitcher = () => {
       name: credentials.name,
       email: credentials.email,
       password: credentials.password,
+      phoneNumber: credentials.phoneNumber,
       role: activeTab,
     };
 
@@ -81,28 +127,54 @@ const TabSwitcher = () => {
       availability: credentials.availability,
       role: activeTab,
     };
-
-    if (activeTab === "doctor") {
-      console.log("Doctor===>", doctorsData);
+    if (activeTab === "Doctor") {
+      ApiPost("/auth/signup", doctorsData)
+        .then((res) => {
+          dispatch({
+            type: "set",
+            isLoggedIn: true,
+            userInfo: res.data.data,
+          });
+          toast.success(`${activeTab} Created Successfully`);
+          router.push("/");
+        })
+        .catch((err) => {
+          toast.error("Something went wrong");
+        });
     } else {
-      console.log("Patient====>", patientData);
+      ApiPost("/auth/signup", patientData)
+        .then((res) => {
+          dispatch({
+            type: "set",
+            isLoggedIn: true,
+            userInfo: res.data.data,
+          });
+          router.push("/");
+          toast.success(`${activeTab} Created Successfully`);
+        })
+        .catch((err) => {
+          toast.error("Something went wrong");
+        });
     }
   };
-
+  const transformedServices = services?.map((service) => ({
+    label: service?.name,
+    value: service?._id,
+  }));
   return (
     <Layouts footer={2}>
       <PageBanner title={"Sign Up"} pageName="Sign Up" />
       <div className="main">
         <div className="tabSwitcher">
           <button
-            className={`tabButton ${activeTab === "patient" ? "active" : ""}`}
-            onClick={() => setActiveTab("patient")}
+            className={`tabButton ${activeTab === "Patient" ? "active" : ""}`}
+            onClick={() => setActiveTab("Patient")}
           >
             Patient
           </button>
           <button
-            className={`tabButton ${activeTab === "doctor" ? "active" : ""}`}
-            onClick={() => setActiveTab("doctor")}
+            className={`tabButton ${activeTab === "Doctor" ? "active" : ""}`}
+            onClick={() => setActiveTab("Doctor")}
           >
             Doctor
           </button>
@@ -151,24 +223,22 @@ const TabSwitcher = () => {
                   value={credentials.username}
                 />
               </div>
-              {activeTab === "doctor" && (
-                <div className="input-group mb-3">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-phone"></i>
-                    </span>
-                  </div>
-                  <input
-                    required
-                    type="text"
-                    name="phoneNumber"
-                    className="form-control"
-                    placeholder="Phone Number"
-                    onChange={handleInputChange}
-                    value={credentials.phoneNumber}
-                  />
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-phone"></i>
+                  </span>
                 </div>
-              )}
+                <input
+                  required
+                  type="text"
+                  name="phoneNumber"
+                  className="form-control"
+                  placeholder="Phone Number"
+                  onChange={handleInputChange}
+                  value={credentials.phoneNumber}
+                />
+              </div>
 
               <div className="input-group mb-3 ">
                 <div className="input-group-prepend">
@@ -186,7 +256,7 @@ const TabSwitcher = () => {
                   value={credentials.password}
                 />
               </div>
-              {activeTab === "doctor" && (
+              {activeTab === "Doctor" && (
                 <>
                   <div className="input-group mb-3">
                     <div className="input-group-prepend">
@@ -225,8 +295,9 @@ const TabSwitcher = () => {
                     <div className="input-group-prepend">Select Specialty</div>
                     <div style={{ width: "100%" }}>
                       <Select
+                        styles={customStyles}
                         required
-                        options={Specialty}
+                        options={transformedServices}
                         onChange={handleSelectChange}
                         placeholder="Select specialty..."
                       />
@@ -236,6 +307,7 @@ const TabSwitcher = () => {
                     <div className="input-group-prepend">Select Days</div>
                     <div style={{ width: "100%" }}>
                       <Select
+                        styles={customStyles}
                         required
                         hideSelectedOptions={true}
                         isMulti
@@ -249,6 +321,7 @@ const TabSwitcher = () => {
                     <div className="input-group-prepend">Select Time Slots</div>
                     <div style={{ width: "100%" }}>
                       <Select
+                        styles={customStyles}
                         required
                         hideSelectedOptions={true}
                         isMulti
@@ -262,6 +335,7 @@ const TabSwitcher = () => {
                     <div className="input-group-prepend">Select Service</div>
                     <div style={{ width: "100%" }}>
                       <Select
+                        styles={customStyles}
                         required
                         hideSelectedOptions={true}
                         isMulti
