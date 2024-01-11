@@ -161,7 +161,7 @@ const Header1 = ({ headerTopbar, position }) => {
                   <li>
                     <Link
                       href={`${
-                        userInfo.role === "admin" ? "/dashboard" : "/profile"
+                        userInfo?.role === "admin" ? "/dashboard" : "/profile"
                       }`}
                     >
                       <button
@@ -176,7 +176,7 @@ const Header1 = ({ headerTopbar, position }) => {
                       </button>
                     </Link>
                     <ul className="sub-menu">
-                      {userInfo.role === "admin" ? (
+                      {userInfo?.role === "admin" ? (
                         <li>
                           <div className="logoutbutton" onClick={logOut}>
                             Logout
