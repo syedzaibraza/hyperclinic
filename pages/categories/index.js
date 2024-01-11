@@ -1,30 +1,12 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import PageBanner from "../src/components/PageBanner";
-import Layouts from "../src/layouts/Layouts";
-import { ApiGet } from "./api/hello";
-import { toast } from "react-toastify";
+import PageBanner from "../../src/components/PageBanner";
+import Layouts from "../../src/layouts/Layouts";
 
 const ServiceTwo = () => {
-  const [services, setServices] = useState([]);
-  console.log("services", services);
-
-  useEffect(() => {
-    GetCategories();
-  }, []);
-
-  const GetCategories = () => {
-    ApiGet("/categories")
-      .then((res) => {
-        setServices(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <Layouts footer={1}>
-      <PageBanner title={"Our Services"} pageName="Services" />
+      <PageBanner title={"Categories"} pageName="Categories" />
       <section className="services-area section-gap-top-less bg-color-grey">
         <div className="container">
           <div className="row justify-content-center service-loop">
@@ -34,17 +16,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/heart.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adcdd">
                     <a>Cardiology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Heart and blood vessel experts, addressing conditions such as
+                  heart disease and hypertension.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adcdd">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -58,17 +43,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/lungs.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
-                    <a>Pulmonary</a>
+                  <Link href="/categories/6597ff56af05d9477c3adcdb">
+                    <a>Pulmonology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Specialists in lung and respiratory system disorders, treating
+                  conditions like asthma and chronic bronchitis.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adcdb">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -82,17 +70,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/brain.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adcdf">
                     <a>Neurology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Specializes in the nervous system, treating conditions like
+                  epilepsy, multiple sclerosis, and Parkinson's.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adcdf">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -106,17 +97,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/stomach.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adce0">
                     <a>Gastroenterology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Focuses on digestive system disorders, treating conditions
+                  like IBS, Crohn's disease, and ulcers.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href="/categories/6597ff56af05d9477c3adce0">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -130,17 +124,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/virus.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
-                    <a>Covid - 19</a>
+                  <Link href=" /categories/6597ff56af05d9477c3adce1">
+                    <a>Allergy and Immunology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Deals with allergic reactions and immune system disorders,
+                  treating allergies and autoimmune diseases.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adce1">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -154,17 +151,21 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/bronchus.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adce4">
                     <a>Orthopedics</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  {" "}
+                  Deals with bones, joints, ligaments, and tendons, treating
+                  fractures, arthritis, and back pain.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adce4">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -178,17 +179,21 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/eye.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
-                    <a>Eye Caring</a>
+                  <Link href=" /categories/6597ff56af05d9477c3adce6">
+                    <a>Ophthalmology</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  {" "}
+                  Eye specialists, treating vision problems, eye diseases, and
+                  performing eye surgery.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adce6">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -202,17 +207,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/teeth.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
-                    <a>Dental Caring</a>
+                  <Link href=" /categories/6597ff56af05d9477c3adce8">
+                    <a>General Practice</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Primary care doctors providing comprehensive health care and
+                  managing various conditions.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adce8">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>
@@ -226,17 +234,20 @@ const ServiceTwo = () => {
                   <img src="assets/img/icon/heart-4.png" alt="Icon" />
                 </div>
                 <h4 className="title">
-                  <Link href="/service-details">
-                    <a>Dental Caring</a>
+                  <Link href=" /categories/6597ff56af05d9477c3adcea">
+                    <a>Vascular Surgery</a>
                   </Link>
                 </h4>
-                <p>Dolor sit amet consectetur ascing elitsed eiusmod tempor</p>
+                <p>
+                  Focuses on diseases of the vascular system, performing
+                  surgeries on veins and arteries.
+                </p>
 
                 <div className="box-link-wrap">
                   <span className="link-icon">
                     <i className="far fa-plus"></i>
                   </span>
-                  <Link href="/service-details">
+                  <Link href=" /categories/6597ff56af05d9477c3adcea">
                     <a className="box-link">
                       Read More <i className="far fa-plus"></i>
                     </a>

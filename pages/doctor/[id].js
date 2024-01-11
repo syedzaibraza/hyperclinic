@@ -74,12 +74,14 @@ const DoctorDetails = () => {
                         </span>
                       </div>
                       <div>
-                        <a
-                          href="#"
-                          className="template-btn template-btn-primary"
-                        >
-                          Appointment Now <i className="far fa-plus"></i>
-                        </a>
+                        <Link href={`/appointments/${state?._id}`}>
+                          <a
+                            href="#"
+                            className="template-btn template-btn-primary"
+                          >
+                            Appointment Now <i className="far fa-plus"></i>
+                          </a>
+                        </Link>
                       </div>
                     </div>
                     <p>{state?.description}</p>

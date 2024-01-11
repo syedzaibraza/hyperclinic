@@ -3955,7 +3955,6 @@ button {
 	font-family: var(--font-lora);
 	font-size: 18px;
 	font-weight: 600;
-	color: var(--color-heading);
 }
 
 @media (max-width: 575px) {
@@ -10401,7 +10400,7 @@ button {
 }
 
 .template-footer.have-cta-boxed-one .footer-inner {
-	padding-top: 200px;
+	padding-top: 50px;
 }
 
 .template-footer.have-cta-boxes-two .cta-boxes-wrapper {
@@ -10469,7 +10468,7 @@ button {
 .booking-list {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 16px;
 	padding-top: 20px;
   }
   
@@ -10516,4 +10515,141 @@ button {
 	background-color: #c0392b;
   }
   
+  
+
+  .health-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	max-width: 400px;
+  
+	label {
+	  display: flex;
+	  flex-direction: column;
+	  margin-bottom: 10px;
+  
+	  &:not(:last-child) {
+		margin-bottom: 20px;
+	  }
+	}
+  
+	.react-select-container {
+	  margin-top: 5px;
+	}
+  
+	button {
+	  padding: 10px 15px;
+	  background-color: #0887CD;
+	  color: white;
+	  border: none;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+  
+	  &:hover {
+		background-color: darken(#0887CD, 10%);
+	  }
+	}
+
+  }
+  
+  /* .disease-card {
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin: 20px;
+	max-width: 600px;
+  }
+  
+  .disease-card .disease-name {
+	color: #333;
+	margin-bottom: 15px;
+  }
+  
+  .disease-card .category,
+  .disease-card .symptoms,
+  .disease-card .medications {
+	margin-bottom: 15px;
+  }
+  
+  .disease-card strong {
+	color: #555;
+  }
+  
+  .disease-card ul {
+	list-style: none;
+	padding: 0;
+  }
+  
+  .disease-card li {
+	background-color: #f7f7f7;
+	padding: 5px 10px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	display: inline-block;
+	margin-right: 5px;
+  }
+  
+  .disease-card .medication {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+  }
+  
+  .disease-card .medication .medication-name {
+	font-weight: 600;
+  }
+  
+  .disease-card .medication .medication-dosage,
+  .disease-card .medication .medication-frequency {
+	font-size: 0.9em;
+	color: #666;
+  }
+   */
+
+  .health-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 400px;
+	background: #e6e6e6;
+    padding: 20px;
+  }
+  .health-form input,textarea{
+	background-color: white;
+	border-radius: 4px;
+  }
+  .health-form label {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+  }
+  
+  .health-form label:not(:last-child) {
+	margin-bottom: 20px;
+  }
+  
+  .health-form .react-select-container {
+	margin-top: 5px;
+  }
+  
+  .health-form button {
+	padding: 10px 15px;
+	background-color: #0887CD;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .health-form button:hover {
+	background-color: #0779B2; /* This color is an approximation of darken(#0887CD, 10%) */
+  }
+  
+  /* Add more styles as needed */
   

@@ -56,6 +56,7 @@ const Contact = () => {
                       <div className="input-field">
                         <label htmlFor="message">Write Message</label>
                         <textarea
+                          style={{ backgroundColor: "var(--color-grey)" }}
                           id="message"
                           placeholder="Write Message...."
                           defaultValue={""}

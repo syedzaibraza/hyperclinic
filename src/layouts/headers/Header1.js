@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { ApiGet } from "../../../pages/api/hello";
 import { toast } from "react-toastify";
+import useLogout from "../../utils/logOut";
 
 const Header1 = ({ headerTopbar, position }) => {
   const [sidebarTrigger, setSidebarTrigger] = useState(false);
@@ -14,6 +15,7 @@ const Header1 = ({ headerTopbar, position }) => {
   const { isLoggedIn, userInfo } = useSelector((state) => state);
   const dispatch = useDispatch();
   const pathname = useRouter().pathname;
+  const logOut = useLogout();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
@@ -125,42 +127,30 @@ const Header1 = ({ headerTopbar, position }) => {
                   <Link href="/about">About</Link>
                 </li>
 
-                <li className={`${pathname === "/service-two" && "active"} `}>
-                  <Link href="/service-two">
+                <li className={`${pathname === "/categories" && "active"} `}>
+                  <Link href="/categories">
                     <a>
                       Services
-                      {/* <span className="dd-trigger">
-                      <i className="far fa-plus" />
-                    </span> */}
+                      <span className="dd-trigger">
+                        <i className="far fa-plus" />
+                      </span>
                     </a>
                   </Link>
-                </li>
-                {/* <ul className="sub-menu">
-                    <li>
-                      <Link href="/service-two">
-                        <a>
-                          Services
-                           <span className="dd-trigger">
-                            <i className="far fa-plus" />
-                          </span> 
-                        </a>
-                      </Link>
-                      <ul className="sub-menu">
-                        <Services />
-                      </ul> 
-                    </li>
-                    <Pages />
+                  <ul className="sub-menu">
+                    <Services />
                   </ul>
-                </li> */}
-                <li className={`${pathname === "/labs" && "active"} `}>
-                  <Link href="/labs">Labs</Link>
+                </li>
+                <li
+                  className={`${pathname === "/symptoms-checker" && "active"} `}
+                >
+                  <Link href="/symptoms-checker">Symptoms Checker</Link>
                 </li>
                 <li className={`${pathname === "/doctor" && "active"} `}>
                   <Link href="/doctor">
                     <a>Doctors</a>
                   </Link>
                 </li>
-                <li className={`${pathname === "/contact" && "active"} `}>
+                <li className={`${pathname === "/appointments" && "active"} `}>
                   <Link href="/appointments">Appointments</Link>
                 </li>
                 <li className={`${pathname === "/contact" && "active"} `}>
@@ -172,7 +162,11 @@ const Header1 = ({ headerTopbar, position }) => {
               <ul className="primary-menu">
                 {isLoggedIn ? (
                   <li>
-                    <Link href="/profile">
+                    <Link
+                      href={`${
+                        userInfo.role === "admin" ? "/dashboard" : "/profile"
+                      }`}
+                    >
                       <button
                         className="template-btn text-center template-btn-primary mt-sm-30  wow fadeInRight"
                         data-wow-delay="0.3s"
@@ -185,7 +179,15 @@ const Header1 = ({ headerTopbar, position }) => {
                       </button>
                     </Link>
                     <ul className="sub-menu">
-                      <Login />
+                      {userInfo.role === "admin" ? (
+                        <li>
+                          <div className="logoutbutton" onClick={logOut}>
+                            Logout
+                          </div>
+                        </li>
+                      ) : (
+                        <Login />
+                      )}
                     </ul>
                   </li>
                 ) : (

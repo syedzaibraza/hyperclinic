@@ -62,16 +62,16 @@ const About = () => {
             <div className="col-xl-5 col-lg-6 col-md-8">
               <div className="about-text">
                 <div className="section-heading mb-35">
-                  <span className="tagline">About Hyper Clinic</span>
+                  <span className="tagline">About Seeva</span>
                   <h2 className="title">All-in-One Worksite Health Solution</h2>
 
                   <p>Established in 2023 for Medical Services</p>
                 </div>
                 <p>
-                  Welcome to Hyper Clinic, a leading healthcare service provider
-                  known for its world-class medical facilities and a team of
-                  highly experienced doctors. We are committed to providing the
-                  best care to every patient every day.
+                  Welcome to Seeva, a leading healthcare service provider known
+                  for its world-class medical facilities and a team of highly
+                  experienced doctors. We are committed to providing the best
+                  care to every patient every day.
                 </p>
                 <br />
                 <p>

@@ -32,7 +32,7 @@ export const customStyles = {
   // Add more custom styles if needed for other parts of the Select
 };
 
-const TabSwitcher = () => {
+const Dashboard = () => {
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -47,7 +47,6 @@ const TabSwitcher = () => {
       service: [],
     },
   });
-  const [activeTab, setActiveTab] = useState("Patient");
   const dispatch = useDispatch();
   const [services, setServices] = useState([]);
   const router = useRouter();
@@ -110,14 +109,6 @@ const TabSwitcher = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const patientData = {
-      name: credentials.name,
-      email: credentials.email,
-      password: credentials.password,
-      phoneNumber: credentials.phoneNumber,
-      role: activeTab,
-    };
-
     const doctorsData = {
       ...credentials,
       specialty: credentials.specialty,
@@ -125,37 +116,22 @@ const TabSwitcher = () => {
       address: credentials.address,
       description: credentials.description,
       availability: credentials.availability,
-      role: activeTab,
+      role: "Doctor",
     };
-    if (activeTab === "Doctor") {
-      ApiPost("/auth/signup", doctorsData)
-        .then((res) => {
-          dispatch({
-            type: "set",
-            isLoggedIn: true,
-            userInfo: res.data.data,
-          });
-          toast.success(`${activeTab} Created Successfully`);
-          router.push("/");
-        })
-        .catch((err) => {
-          toast.error("Something went wrong");
+
+    ApiPost("/auth/signup", doctorsData)
+      .then((res) => {
+        dispatch({
+          type: "set",
+          isLoggedIn: true,
+          userInfo: res.data.data,
         });
-    } else {
-      ApiPost("/auth/signup", patientData)
-        .then((res) => {
-          dispatch({
-            type: "set",
-            isLoggedIn: true,
-            userInfo: res.data.data,
-          });
-          router.push("/");
-          toast.success(`${activeTab} Created Successfully`);
-        })
-        .catch((err) => {
-          toast.error("Something went wrong");
-        });
-    }
+        toast.success(`Doctor Created Successfully`);
+        router.push("/dashboard");
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      });
   };
   const transformedServices = services?.map((service) => ({
     label: service?.name,
@@ -163,22 +139,8 @@ const TabSwitcher = () => {
   }));
   return (
     <Layouts footer={2}>
-      <PageBanner title={"Sign Up"} pageName="Sign Up" />
+      <PageBanner title={"Dashboard"} pageName="Dashboard" />
       <div className="main">
-        <div className="tabSwitcher">
-          <button
-            className={`tabButton ${activeTab === "Patient" ? "active" : ""}`}
-            onClick={() => setActiveTab("Patient")}
-          >
-            Patient
-          </button>
-          <button
-            className={`tabButton ${activeTab === "Doctor" ? "active" : ""}`}
-            onClick={() => setActiveTab("Doctor")}
-          >
-            Doctor
-          </button>
-        </div>
         <div className="container">
           <div className="login_form">
             <div className="header-form pb-3">
@@ -256,113 +218,101 @@ const TabSwitcher = () => {
                   value={credentials.password}
                 />
               </div>
-              {activeTab === "Doctor" && (
-                <>
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fa fa-map-marker"></i>
-                      </span>
-                    </div>
-                    <input
-                      required
-                      type="text"
-                      name="address"
-                      className="form-control"
-                      placeholder="Address"
-                      onChange={handleInputChange}
-                      value={credentials.address}
-                    />
-                  </div>
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-info-circle"></i>
-                      </span>
-                    </div>
-                    <input
-                      required
-                      type="text"
-                      name="description"
-                      className="form-control"
-                      placeholder="Description"
-                      onChange={handleInputChange}
-                      value={credentials.description}
-                    />
-                  </div>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fa fa-map-marker"></i>
+                  </span>
+                </div>
+                <input
+                  required
+                  type="text"
+                  name="address"
+                  className="form-control"
+                  placeholder="Address"
+                  onChange={handleInputChange}
+                  value={credentials.address}
+                />
+              </div>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-info-circle"></i>
+                  </span>
+                </div>
+                <input
+                  required
+                  type="text"
+                  name="description"
+                  className="form-control"
+                  placeholder="Description"
+                  onChange={handleInputChange}
+                  value={credentials.description}
+                />
+              </div>
 
-                  <div className="input-group mb-3 ">
-                    <div className="input-group-prepend">Select Specialty</div>
-                    <div style={{ width: "100%" }}>
-                      <Select
-                        styles={customStyles}
-                        required
-                        options={transformedServices}
-                        onChange={handleSelectChange}
-                        placeholder="Select specialty..."
-                      />
-                    </div>
-                  </div>
-                  <div className="input-group mb-3 ">
-                    <div className="input-group-prepend">Select Days</div>
-                    <div style={{ width: "100%" }}>
-                      <Select
-                        styles={customStyles}
-                        required
-                        hideSelectedOptions={true}
-                        isMulti
-                        onChange={handleDays}
-                        options={Days}
-                        placeholder="Select Available Days..."
-                      />
-                    </div>
-                  </div>
-                  <div className="input-group mb-3 ">
-                    <div className="input-group-prepend">Select Time Slots</div>
-                    <div style={{ width: "100%" }}>
-                      <Select
-                        styles={customStyles}
-                        required
-                        hideSelectedOptions={true}
-                        isMulti
-                        onChange={handleTimeSlots}
-                        options={Slots}
-                        placeholder="Select Time Slots..."
-                      />
-                    </div>
-                  </div>
-                  <div className="input-group mb-3 ">
-                    <div className="input-group-prepend">Select Service</div>
-                    <div style={{ width: "100%" }}>
-                      <Select
-                        styles={customStyles}
-                        required
-                        hideSelectedOptions={true}
-                        isMulti
-                        onChange={handleService}
-                        options={Service}
-                        placeholder="Select Service..."
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
+              <div className="input-group mb-3 ">
+                <div className="input-group-prepend">Select Specialty</div>
+                <div style={{ width: "100%" }}>
+                  <Select
+                    styles={customStyles}
+                    required
+                    options={transformedServices}
+                    onChange={handleSelectChange}
+                    placeholder="Select specialty..."
+                  />
+                </div>
+              </div>
+              <div className="input-group mb-3 ">
+                <div className="input-group-prepend">Select Days</div>
+                <div style={{ width: "100%" }}>
+                  <Select
+                    styles={customStyles}
+                    required
+                    hideSelectedOptions={true}
+                    isMulti
+                    onChange={handleDays}
+                    options={Days}
+                    placeholder="Select Available Days..."
+                  />
+                </div>
+              </div>
+              <div className="input-group mb-3 ">
+                <div className="input-group-prepend">Select Time Slots</div>
+                <div style={{ width: "100%" }}>
+                  <Select
+                    styles={customStyles}
+                    required
+                    hideSelectedOptions={true}
+                    isMulti
+                    onChange={handleTimeSlots}
+                    options={Slots}
+                    placeholder="Select Time Slots..."
+                  />
+                </div>
+              </div>
+              <div className="input-group mb-3 ">
+                <div className="input-group-prepend">Select Service</div>
+                <div style={{ width: "100%" }}>
+                  <Select
+                    styles={customStyles}
+                    required
+                    hideSelectedOptions={true}
+                    isMulti
+                    onChange={handleService}
+                    options={Service}
+                    placeholder="Select Service..."
+                  />
+                </div>
+              </div>
               <div className="login-btns">
                 <button
                   type="submit"
                   className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
                   data-wow-delay="0.3s"
                 >
-                  Signup
+                  Add Doctor
                 </button>
-                <Link
-                  href={"/login"}
-                  type="submit"
-                  className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
-                  data-wow-delay="0.3s"
-                >
-                  Already have Account
-                </Link>
               </div>
             </form>
           </div>
@@ -372,4 +322,4 @@ const TabSwitcher = () => {
   );
 };
 
-export default TabSwitcher;
+export default Dashboard;

@@ -27,14 +27,6 @@ const Index = () => {
                     Dolor sit amet consectetur adipiscing elitsedes eiusmod
                     tempor incididunt utlabore Lorem
                   </p>
-                  <Link href="/symptoms-checker">
-                    <a
-                      className="template-btn wow fadeInUp"
-                      data-wow-delay="0.5s"
-                    >
-                      Symptoms Checker <i className="far fa-search" />
-                    </a>
-                  </Link>
                 </div>
               </div>
               <div className="col-lg-7">
@@ -48,9 +40,103 @@ const Index = () => {
             </div>
           </div>
         </section>
+        <section className="cta-section cta-boxed-three pb-5">
+          <div className="container">
+            <div className="cta-inner">
+              <div className="row align-items-center justify-content-center">
+                <div className="col-lg-6 order-lg-last">
+                  <div
+                    className="cta-img text-center text-lg-right wow fadeInUp"
+                    data-wow-delay="0.3s"
+                  >
+                    <img
+                      className="animate-float-bob-y"
+                      src="https://seeva.vercel.app/assets/img/cta-img/illustration.png"
+                      alt="Image"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-10">
+                  <div className="cta-content">
+                    <div className="section-heading heading-white">
+                      {/* <span className="tagline">
+                        Get Our Doctors Consultations
+                      </span> */}
+                      <h2 className="title">
+                        Check Your Symptoms and Find Medication & Doctors
+                      </h2>
+                    </div>
+
+                    <Link href="/symptoms-checker">
+                      <a className="template-btn mt-30" data-wow-delay="0.5s">
+                        Symptoms Checker <i className="far fa-search" />
+                      </a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         {/*====== Hero Area End ======*/}
+        <div className="cta-boxes-wrapper">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-1.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">
+                    Looking a Doctors For Health Care
+                  </h2>
+                  <Link href={"/doctor"}>
+                    <a className="template-btn template-btn-bordered">
+                      Find Doctor <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-2.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">Make Appointment Online (24/7)</h2>
+                  <Link href="/appointments">
+                    <a className="template-btn template-btn-bordered">
+                      Appointment <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-4 col-md-8">
+                <div
+                  className="cta-boxed-two bg-color-secondary bg-size-cover blend-mode-multiply mb-30"
+                  style={{
+                    backgroundImage:
+                      "url(https://seeva.vercel.app/assets/img/cta-img/cta-boxed-2-3.jpg)",
+                  }}
+                >
+                  <h2 className="cta-title">Innovative Labs For Tests</h2>
+                  <Link href="/labs">
+                    <a className="template-btn template-btn-bordered">
+                      Find Labs <i className="far fa-plus" />
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/*====== Why Choose Section Start ======*/}
-        <section className="wcu-section section-gap-top">
+        {/* <section className="wcu-section section-gap-top">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-md-10">
@@ -70,11 +156,14 @@ const Index = () => {
                 <div className="image-title-box mt-30">
                   <h4 className="title">
                     <Link href="/service">
-                      <a>Optimize Your Health Care Services</a>
+                      <a>Symptoms Checker</a>
                     </Link>
                   </h4>
                   <div className="image">
-                    <img src="assets/img/img-title-box/01.jpg" alt="Image" />
+                    <img
+                      src="https://seeva.vercel.app/assets/img/img-title-box/01.jpg"
+                      alt="Image"
+                    />
                   </div>
                 </div>
               </div>
@@ -89,7 +178,10 @@ const Index = () => {
                     </Link>
                   </h4>
                   <div className="image">
-                    <img src="assets/img/img-title-box/02.jpg" alt="Image" />
+                    <img
+                      src="https://seeva.vercel.app/assets/img/img-title-box/02.jpg"
+                      alt="Image"
+                    />
                   </div>
                 </div>
               </div>
@@ -104,16 +196,20 @@ const Index = () => {
                     </Link>
                   </h4>
                   <div className="image">
-                    <img src="assets/img/img-title-box/03.jpg" alt="Image" />
+                    <img
+                      src="https://seeva.vercel.app/assets/img/img-title-box/03.jpg"
+                      alt="Image"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Why Choose Section End ======*/}
+
         {/*====== About Section Start ======*/}
-        <section className="about-section section-gap">
+        {/* <section className="about-section section-gap">
           <div className="container">
             <div className="row justify-content-lg-between justify-content-center align-items-center">
               <div className="col-lg-6 col-md-10">
@@ -189,10 +285,10 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== About Section End ======*/}
         {/*====== Service Section Start ======*/}
-        <section className="service-section bg-color-grey section-gap">
+        {/* <section className="service-section bg-color-grey section-gap">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-xl-7 col-lg-8">
@@ -377,20 +473,20 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Service Section End ======*/}
         {/*====== Big Tagline Start ======*/}
-        <section className="big-tagline">
+        {/* <section className="big-tagline">
           <div className="container-fluid">
             <h2 className="tagline">
               Learn better health outcomes, improve costs and increase
               productivity for your business
             </h2>
           </div>
-        </section>
+        </section> */}
         {/*====== Big Tagline End ======*/}
         {/*====== Doctor Section Start ======*/}
-        <section className="doctors-section section-gap">
+        {/* <section className="doctors-section section-gap">
           <div className="container">
             <div className="row justify-content-between align-items-center mb-40">
               <div className="col-lg-5 col-md-6">
@@ -573,10 +669,10 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Doctor Section End ======*/}
         {/*====== Appointment Section Start ======*/}
-        <section className="appointment-section section-gap-bottom">
+        {/* <section className="appointment-section section-gap-bottom">
           <div className="container">
             <div className="appointment-form-two">
               <div className="form-wrap">
@@ -655,10 +751,10 @@ const Index = () => {
               ></div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Appointment Section End ======*/}
         {/*====== Testimonials Section Start ======*/}
-        <section className="testimonial-section bg-color-grey section-have-half-bg">
+        {/* <section className="testimonial-section bg-color-grey section-have-half-bg">
           <div className="container-fluid">
             <div className="row justify-content-end">
               <div className="col-lg-6">
@@ -772,17 +868,17 @@ const Index = () => {
               backgroundImage: "url(assets/img/section-bg/half-bg-img-01.jpg)",
             }}
           />
-        </section>
+        </section> */}
         {/*====== Testimonials Section End ======*/}
         {/*====== Counter Section Start ======*/}
-        <section className="counter-section section-gap">
+        {/* <section className="counter-section section-gap">
           <div className="container">
             <div className="counter-inner">
               <div className="row justify-content-between">
                 <div className="col-lg-auto col-md-5 col-sm-6">
                   <div className="counter-item">
                     <div className="counter-wrap">
-                      {/* <span className="counter">359</span> */}
+                      
                       <Counter end={359} />
                       <span className="suffix">+</span>
                     </div>
@@ -793,7 +889,7 @@ const Index = () => {
                   <div className="counter-item">
                     <div className="counter-wrap">
                       <Counter end={85} />
-                      {/* <span className="counter">85</span> */}
+                      
                       <span className="suffix">k+</span>
                     </div>
                     <h6 className="title">Saticfied Our Clients</h6>
@@ -803,7 +899,6 @@ const Index = () => {
                   <div className="counter-item">
                     <div className="counter-wrap">
                       <Counter end={863} />
-                      {/* <span className="counter">863</span> */}
                       <span className="suffix">+</span>
                     </div>
                     <h6 className="title">Win International Awards</h6>
@@ -821,10 +916,10 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Counter Section End ======*/}
         {/*====== Help Section Start ======*/}
-        <section className="help-section section-gap-bottom">
+        {/* <section className="help-section section-gap-bottom">
           <div className="container">
             <div className="row justify-content-center justify-content-lg-end align-items-center">
               <div className="col-xl-5 col-lg-6 col-md-8">
@@ -868,7 +963,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/*====== Help Section End ======*/}
         {/*====== Partners Section Start ======*/}
         {/* <section className="partner-section section-gap bg-color-secondary section-map-overly">

@@ -8,7 +8,7 @@ const Footer2 = ({ noNewsletters }) => {
         noNewsletters ? "" : "have-cta-boxes-two"
       }`}
     >
-      {!noNewsletters && (
+      {/* {!noNewsletters && (
         <div className="cta-boxes-wrapper">
           <div className="container">
             <div className="row justify-content-center">
@@ -65,7 +65,7 @@ const Footer2 = ({ noNewsletters }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       <div className="footer-inner bg-color-primary">
         <div className="container">
           <div className="footer-widgets">

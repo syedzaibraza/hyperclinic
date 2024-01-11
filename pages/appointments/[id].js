@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PageBanner from "../src/components/PageBanner";
-import Layouts from "../src/layouts/Layouts";
-import { withAuth } from "../redux/useAuth";
+import PageBanner from "../../src/components/PageBanner";
+import Layouts from "../../src/layouts/Layouts";
+import { withAuth } from "../../redux/useAuth";
 import Select from "react-select";
-import { ApiGet, ApiPost } from "./api/hello";
+import { ApiGet, ApiPost } from "../api/hello";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { Service } from "../../src/utils/DataCreator";
+import CreatableSelect from "react-select/creatable";
 
 const customStyles = {
   control: (provided) => ({
@@ -37,7 +40,11 @@ const customStyles = {
 };
 
 const Appointments = () => {
-  const [state, setState] = useState();
+  const router = useRouter();
+  const { id } = router.query;
+  console.log("id", id);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [state, setState] = useState([]);
   const { userInfo } = useSelector((state) => state);
   const [freeSlots, setFreeSlots] = useState([]);
   const [credentials, setCredentials] = useState({
@@ -45,25 +52,60 @@ const Appointments = () => {
     date: "",
     timeSlot: "",
   });
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [medication, setMedication] = useState([]);
+  const [medicalTests, setMedicalTests] = useState([]);
+  const [surgeries, setSurgeries] = useState([]);
+  const handleSurgeries = (options) => {
+    setSurgeries(options);
+  };
+  const handleMedicalTests = (options) => {
+    setMedicalTests(options);
+  };
+  const handleMedication = (options) => {
+    setMedication(options);
+  };
+  const handleChange = (options) => {
+    console.log("options", options);
+    setSelectedOptions(options);
+  };
   useEffect(() => {
     GetDoctors();
-  }, []);
-
+  }, [id]);
+  useEffect(() => {
+    if (state.length > 0) {
+      setSelectedDoctor({
+        value: state[0]._id,
+        label: state[0].name,
+      });
+      setCredentials((prevState) => ({
+        ...prevState,
+        bookingWith: state[0]._id, // Setting default value
+      }));
+    }
+  }, [state]);
   const GetDoctors = () => {
-    ApiGet("/user/doctors")
+    ApiGet(`user/${id}`)
       .then((res) => {
-        setState(res.data);
+        setState([res.data]);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
   };
 
+  console.log(state);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       ...credentials,
       user: userInfo?._id,
+      medicalConditions: selectedOptions.map((item) => item.value),
+      currentMedications: medication.map((item) => item.value),
+      medicalTests: medicalTests.map((item) => item.value),
+      surgeries: surgeries.map((item) => item.value),
     };
     ApiPost("/bookings/create", data)
       .then((res) => {
@@ -82,7 +124,7 @@ const Appointments = () => {
 
   return (
     <Layouts footer={2}>
-      <PageBanner title={"Appointment"} />
+      <PageBanner title={`Appointment with ${state[0]?.name}`} />
       <section className="appointment-section section-gap">
         <div className="container container-1500">
           <div className="appointment-form-two style-two">
@@ -106,16 +148,17 @@ const Appointments = () => {
                     <div className="input-field">
                       <Select
                         styles={customStyles}
-                        options={state?.map((item) => ({
-                          value: item?._id,
-                          label: item?.name,
+                        options={state.map((item) => ({
+                          value: item._id,
+                          label: item.name,
                         }))}
-                        onChange={(selectedOption) =>
-                          setCredentials((prevState) => ({
-                            ...prevState,
-                            bookingWith: selectedOption?.value,
-                          }))
-                        }
+                        value={selectedDoctor}
+                        // onChange={(selectedDoctor) =>
+                        //   setCredentials((prevState) => ({
+                        //     ...prevState,
+                        //     bookingWith: selectedDoctor?.value,
+                        //   }))
+                        // }
                         placeholder="Select Doctor"
                       />
                     </div>
@@ -124,8 +167,8 @@ const Appointments = () => {
                     <div className="input-field">
                        <Select
                         options={appointmentOptions}
-                        onChange={(selectedOption) =>
-                          setAppointmentType(selectedOption)
+                        onChange={(selectedDoctor) =>
+                          setAppointmentType(selectedDoctor)
                         }
                       /> 
                     </div>
@@ -161,13 +204,111 @@ const Appointments = () => {
                       <Select
                         styles={customStyles}
                         options={timeOptions}
-                        onChange={(selectedOption) =>
+                        onChange={(selectedDoctor) =>
                           setCredentials((prevState) => ({
                             ...prevState,
-                            timeSlot: selectedOption?.value,
+                            timeSlot: selectedDoctor?.value,
                           }))
                         }
                         placeholder="Select Time"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="input-field">
+                      <Select
+                        styles={customStyles}
+                        options={Service}
+                        onChange={(selectedDoctor) =>
+                          setCredentials((prevState) => ({
+                            ...prevState,
+                            bookingType: selectedDoctor?.value,
+                          }))
+                        }
+                        placeholder="Select Consultation Type"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <label>
+                      Please provide the name of the last medical doctor or
+                      healthcare professional you consulted.
+                    </label>
+                    <div className="input-field">
+                      <input
+                        value={credentials.lastDoctor}
+                        onChange={(e) =>
+                          setCredentials((prevState) => ({
+                            ...prevState,
+                            lastDoctor: e.target.value,
+                          }))
+                        }
+                        placeholder="Enter last Medical Doctor Name"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <label>
+                      Have you ever been diagnosed with any diseases or medical
+                      conditions? If so, kindly list the names of these
+                      conditions.
+                    </label>
+                    <div className="input-field">
+                      <CreatableSelect
+                        styles={customStyles}
+                        isMulti
+                        onChange={handleChange}
+                        value={selectedOptions}
+                        placeholder="Enter last Medical Condition & press Enter"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <label>
+                      Could you list all the medications you are currently
+                      taking, including any over-the-counter drugs or
+                      supplements?
+                    </label>
+                    <div className="input-field">
+                      <CreatableSelect
+                        styles={customStyles}
+                        isMulti
+                        onChange={handleMedication}
+                        value={medication}
+                        placeholder="Enter current Medical Condition & press Enter"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <label>
+                      Please provide details of any medical tests you have
+                      undergone recently, including the names of the tests and,
+                      if possible, attach or provide the reports associated with
+                      these tests.
+                    </label>
+                    <div className="input-field">
+                      <CreatableSelect
+                        styles={customStyles}
+                        isMulti
+                        onChange={handleMedicalTests}
+                        value={medicalTests}
+                        placeholder="Enter current Mediacl Condition & press Enter"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <label>
+                      Have you undergone any surgical procedures or operations
+                      in the past? If yes, please list them, including the
+                      number of surgeries and their respective names.
+                    </label>
+                    <div className="input-field">
+                      <CreatableSelect
+                        styles={customStyles}
+                        isMulti
+                        onChange={handleSurgeries}
+                        value={surgeries}
+                        placeholder="Enter Surgeries & press Enter"
                       />
                     </div>
                   </div>

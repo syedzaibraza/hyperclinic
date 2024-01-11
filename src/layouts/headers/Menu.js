@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import useLogout from "../../utils/logOut";
+import { useRouter } from "next/router";
 
 export const Login = () => {
   const logOut = useLogout();
@@ -56,19 +57,21 @@ export const Pages = () => (
     </li>
   </Fragment>
 );
-export const Services = () => (
-  <Fragment>
-    <li>
-      <Link href="/service">Service One</Link>
-    </li>
-    <li>
-      <Link href="/service-two">Service Two</Link>
-    </li>
-    <li>
-      <Link href="/service-details">Service Details</Link>
-    </li>
-  </Fragment>
-);
+
+export const Services = () => {
+  const pathname = useRouter().pathname;
+  return (
+    <Fragment>
+      <li className={`${pathname === "/labs" && "active"} `}>
+        <Link href="/labs">Labs</Link>
+      </li>
+      <li className={`${pathname === "/service-two" && "active"} `}></li>{" "}
+      <li>
+        <Link href="/categories">Categories</Link>
+      </li>
+    </Fragment>
+  );
+};
 export const Doctor = () => (
   <Fragment>
     <li>

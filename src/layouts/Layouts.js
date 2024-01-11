@@ -27,7 +27,7 @@ const Layouts = ({
     <Fragment>
       <Header1 />
       {children}
-      <Footer2 />
+      <Footer1 />
       <ScrollTop />
     </Fragment>
   );

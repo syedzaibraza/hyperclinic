@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { withAuth } from "../redux/useAuth";
 import { ApiGet, ApiGetBody, ApiPatch, ApiPost } from "./api/hello";
 import { toast } from "react-toastify";
+import { Accordion, Card } from "react-bootstrap";
+import dayjs from "dayjs";
 
 const DoctorDetails = () => {
   const { userInfo, doctors } = useSelector((state) => state);
@@ -158,47 +160,82 @@ const DoctorDetails = () => {
                         <span className="tagline">Appointment</span>
                         <h2 className="title">Appointments</h2>
                         {bookings?.length ? (
-                          <div className="booking-list">
-                            {bookings.map((booking) => (
-                              <div
-                                key={booking?._id}
-                                className={`booking-card `}
-                              >
-                                <div className="booking-details">
-                                  <h2 className="booking-date">
-                                    {booking?.date}
-                                  </h2>
-                                  <div className="booking-time">
-                                    {booking?.timeSlot}
-                                  </div>
-                                  <div className="booking-with">
-                                    Patient: {booking?.user?.name}
-                                  </div>
-                                  <div className="booking-created">
-                                    Created on:{" "}
-                                    {new Date(
-                                      booking?.createdAt
-                                    ).toLocaleString()}
-                                  </div>
-                                </div>
-                                <button
-                                  className="cancel-booking-btn"
-                                  style={{
-                                    pointerEvents: `${
-                                      booking?.isValid === false
-                                        ? "none"
-                                        : "auto"
-                                    }`,
-                                  }}
-                                  onClick={() => onCancel(booking?._id)}
+                          <Accordion
+                            defaultActiveKey="0"
+                            className="booking-list"
+                          >
+                            {/* {bookings.map((booking) => (
+                                 <> */}
+                            {bookings.map((item, index) => (
+                              <Card key={index}>
+                                <Accordion.Toggle
+                                  as={Card.Header}
+                                  eventKey={index.toString()}
                                 >
-                                  {booking?.isValid === false
-                                    ? "Canceled"
-                                    : "Cancel"}
-                                </button>
-                              </div>
+                                  <div
+                                    style={{
+                                      width: "100%",
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <h4>{item.user.name}</h4>
+                                    <p>
+                                      {dayjs(item.date).format("MMMM DD, YYYY")}
+                                    </p>
+                                  </div>
+                                </Accordion.Toggle>
+                                <Accordion.Collapse eventKey={index.toString()}>
+                                  <Card.Body>
+                                    <p>Time: {item.timeSlot}</p>
+                                    <p>Booking Type: {item.bookingType}</p>
+                                    <div>
+                                      <h4 style={{ paddingTop: "16px" }}>
+                                        Patient Records
+                                      </h4>
+                                      <p>Last Doctor: {item?.lastDoctor}</p>
+                                      <p>
+                                        Medical Condition:{" "}
+                                        {item?.medicalConditions?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Current Medications:{" "}
+                                        {item?.currentMedications?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Medical Tests:{" "}
+                                        {item?.medicalTests?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Surgeries:{" "}
+                                        {item?.surgeries?.map((i) => i + ", ")}
+                                      </p>
+                                    </div>
+                                    {item?.zoomMeeting && (
+                                      <h4 style={{ paddingTop: "16px" }}>
+                                        Zoom Meeting:{" "}
+                                        <a
+                                          rel="noreferrer"
+                                          target="_blank"
+                                          href={item?.zoomMeeting}
+                                        >
+                                          {item?.zoomMeeting}
+                                        </a>
+                                      </h4>
+                                    )}
+                                    {/* Include other data fields as needed */}
+                                  </Card.Body>
+                                </Accordion.Collapse>
+                              </Card>
                             ))}
-                          </div>
+                          </Accordion>
                         ) : (
                           <>No bookings available</>
                         )}
@@ -210,59 +247,82 @@ const DoctorDetails = () => {
                         <span className="tagline">My Bookings</span>
                         <h2 className="title">My Bookings</h2>
                         {bookings?.length ? (
-                          <div className="booking-list">
-                            {bookings.map((booking) => (
-                              <div
-                                key={booking?._id}
-                                className={`booking-card `}
-                              >
-                                <div className="booking-details">
-                                  <h2 className="booking-date">
-                                    {booking?.date}
-                                  </h2>
-                                  <div className="booking-time">
-                                    {booking?.timeSlot}
-                                  </div>
-                                  <div className="booking-with">
-                                    Booking with: {booking?.bookingWith?.name}
-                                  </div>
-                                  <div className="booking-created">
-                                    Created on:{" "}
-                                    {new Date(
-                                      booking?.createdAt
-                                    ).toLocaleString()}
-                                  </div>
-                                </div>
-                                {booking?.isValid === false ? (
+                          <Accordion
+                            defaultActiveKey="0"
+                            className="booking-list"
+                          >
+                            {/* {bookings.map((booking) => (
+                              <> */}
+                            {bookings.map((item, index) => (
+                              <Card key={index}>
+                                <Accordion.Toggle
+                                  as={Card.Header}
+                                  eventKey={index.toString()}
+                                >
                                   <div
                                     style={{
+                                      width: "100%",
                                       display: "flex",
-                                      gap: "8px",
-                                      color: "red",
+                                      justifyContent: "space-between",
                                       alignItems: "center",
                                     }}
                                   >
-                                    <i className="fa fa-exclamation-triangle"></i>
-                                    <div>Canceled</div>
+                                    <h4>{item.bookingWith.name}</h4>
+                                    <p>
+                                      {dayjs(item.date).format("MMMM DD, YYYY")}
+                                    </p>
                                   </div>
-                                ) : (
-                                  <button
-                                    className="cancel-booking-btn"
-                                    style={{
-                                      pointerEvents: `${
-                                        booking?.isValid === false
-                                          ? "none"
-                                          : "auto"
-                                      }`,
-                                    }}
-                                    onClick={() => onCancel(booking?._id)}
-                                  >
-                                    Cancel
-                                  </button>
-                                )}
-                              </div>
+                                </Accordion.Toggle>
+                                <Accordion.Collapse eventKey={index.toString()}>
+                                  <Card.Body>
+                                    <p>Time: {item.timeSlot}</p>
+                                    <p>Booking Type: {item.bookingType}</p>
+                                    <div>
+                                      <h4 style={{ paddingTop: "16px" }}>
+                                        Patient Records
+                                      </h4>
+                                      <p>Last Doctor: {item?.lastDoctor}</p>
+                                      <p>
+                                        Medical Condition:{" "}
+                                        {item?.medicalConditions?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Current Medications:{" "}
+                                        {item?.currentMedications?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Medical Tests:{" "}
+                                        {item?.medicalTests?.map(
+                                          (i) => i + ", "
+                                        )}
+                                      </p>
+                                      <p>
+                                        Surgeries:{" "}
+                                        {item?.surgeries?.map((i) => i + ", ")}
+                                      </p>
+                                    </div>
+                                    {item?.zoomMeeting && (
+                                      <h4 style={{ paddingTop: "16px" }}>
+                                        Zoom Meeting:{" "}
+                                        <a
+                                          rel="noreferrer"
+                                          target="_blank"
+                                          href={item?.zoomMeeting}
+                                        >
+                                          {item?.zoomMeeting}
+                                        </a>
+                                      </h4>
+                                    )}
+                                    {/* Include other data fields as needed */}
+                                  </Card.Body>
+                                </Accordion.Collapse>
+                              </Card>
                             ))}
-                          </div>
+                          </Accordion>
                         ) : (
                           <>No bookings available</>
                         )}

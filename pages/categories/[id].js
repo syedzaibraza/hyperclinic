@@ -1,25 +1,26 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import PreLoader from "../../src/components/PreLoader";
 import PageBanner from "../../src/components/PageBanner";
 import Layouts from "../../src/layouts/Layouts";
-import { ApiGet } from "../api/hello";
-import { toast } from "react-toastify";
-import { SPwithID } from "../../src/utils/DataCreator";
-import PreLoader from "../../src/components/PreLoader";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { ApiGet, ApiPost } from "../api/hello";
 
-const Doctor = () => {
+const CategoryID = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [loading, setLoading] = useState(true);
   const [State, setState] = useState();
+  console.log("Cate", State);
+
   const [Categories, setCategories] = useState();
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
     GetCategories();
-    GetDoctors();
-  }, []);
+    CategoriesDoc();
+  }, [id]);
 
   const GetCategories = () => {
     setLoading(true);
@@ -31,19 +32,10 @@ const Doctor = () => {
         toast.error(err.response.data.message);
       });
   };
-
-  const GetDoctors = () => {
-    ApiGet("/user/doctors")
-      .then((res) => {
-        dispatch({
-          type: "set",
-          doctors: res.data,
-        });
-        setState(res.data);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+  const CategoriesDoc = () => {
+    ApiPost("/user/category", { specialty: id }).then((res) => {
+      setState(res.data);
+    });
   };
   return (
     <Layouts>
@@ -71,8 +63,9 @@ const Doctor = () => {
 
                           <span className="specialty">
                             {
-                              Categories.find((sp) => sp._id === item.specialty)
-                                ?.name
+                              Categories?.find(
+                                (sp) => sp._id === item.specialty._id
+                              )?.name
                             }
                           </span>
                           <ul className="social-links">
@@ -117,4 +110,5 @@ const Doctor = () => {
     </Layouts>
   );
 };
-export default Doctor;
+
+export default CategoryID;

@@ -15,9 +15,9 @@ const SlidePanel = ({ sidebarTrigger, setSidebarTrigger }) => {
         <div className="about-us">
           <h5 className="canvas-widget-title">About Us</h5>
           <p>
-            Welcome to Hyper Clinic, a leading healthcare service provider known
-            for its world-class medical facilities and a team of highly
-            experienced doctors.
+            Welcome to Seeva, a leading healthcare service provider known for
+            its world-class medical facilities and a team of highly experienced
+            doctors.
           </p>
         </div>
         <div className="contact-us">
