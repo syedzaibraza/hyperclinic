@@ -23,10 +23,10 @@ const Index = () => {
                   <h1 className="title wow fadeInDown" data-wow-delay="0.3s">
                     We Care Medical &amp; Health
                   </h1>
-                  <p className="wow fadeInLeft" data-wow-delay="0.4s">
+                  {/* <p className="wow fadeInLeft" data-wow-delay="0.4s">
                     Dolor sit amet consectetur adipiscing elitsedes eiusmod
                     tempor incididunt utlabore Lorem
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="col-lg-7">
