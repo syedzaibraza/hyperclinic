@@ -67,7 +67,7 @@ export const Services = () => {
       </li>
       <li className={`${pathname === "/service-two" && "active"} `}></li>{" "}
       <li>
-        <Link href="/categories">Categories</Link>
+        <Link href="/categories">Find Doctor by Category</Link>
       </li>
     </Fragment>
   );

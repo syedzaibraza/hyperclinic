@@ -15,9 +15,9 @@ const SlidePanel = ({ sidebarTrigger, setSidebarTrigger }) => {
         <div className="about-us">
           <h5 className="canvas-widget-title">About Us</h5>
           <p>
-            Welcome to Seeva, a leading healthcare service provider known for
-            its world-class medical facilities and a team of highly experienced
-            doctors.
+            Welcome to Hyper Clinic, a leading healthcare service provider known
+            for its world-class medical facilities and a team of highly
+            experienced doctors.
           </p>
         </div>
         <div className="contact-us">
@@ -29,8 +29,10 @@ const SlidePanel = ({ sidebarTrigger, setSidebarTrigger }) => {
             </li>
             <li>
               <i className="far fa-envelope-open" />
-              <a href="mailto:support@qolle.com">support@seeva.com</a>
-              <a href="mailto:info@qolle.com">info@seeva.com</a>
+              <a href="mailto:support@hyperclinic.com">
+                support@hyperclinic.com
+              </a>
+              <a href="info@hyperclinic.com">info@hyperclinic.com</a>
             </li>
             <li>
               <i className="far fa-phone" />

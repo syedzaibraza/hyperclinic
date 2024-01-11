@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
     <Fragment>
       {loader && <PreLoader />}
       <Head>
-        <title>Seeva</title>
+        <title>Hyper Clinic</title>
         <link
           rel="shortcut icon"
           href="assets/img/favicon.ico"

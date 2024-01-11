@@ -6,7 +6,7 @@ import Layouts from "../../src/layouts/Layouts";
 const ServiceTwo = () => {
   return (
     <Layouts footer={1}>
-      <PageBanner title={"Categories"} pageName="Categories" />
+      <PageBanner title={"Find Doctor By Category"} pageName="Categories" />
       <section className="services-area section-gap-top-less bg-color-grey">
         <div className="container">
           <div className="row justify-content-center service-loop">
