@@ -9,24 +9,21 @@ const Service = () => {
   const Labs = [
     {
       name: "CHUGHTAI LAB",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/362205072_660319302801681_5756643647973392849_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=bNOfoJWHvo8AX_Qp3Bl&_nc_ht=scontent.flhe33-1.fna&oh=00_AfBwtPSs1GvNc0KrA7QYl3CWvT1OfWiwlSj24kalbUAPfg&oe=659A34D1",
+      logoUrl: "/assets/img/chughtai.jpg",
       description:
         "Chughtai Lab is the leading diagnostic lab in Pakistan. The lab was founded by Dr A S Chughtai in 1983 with a singular focus on the needs of patients. Today, with a team of more than 30 pathologists and more than 200 lab scientists, Chughtai Lab serves patients in more than 100 cities across Pakistan through a network of regional labs and more than 300 collection centers.",
       websiteUrl: "https://chughtailab.com/",
     },
     {
       name: "CITI LAB",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/265261656_3049938551911458_922292811317602974_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=UPCVeHOOqDQAX_cH0O9&_nc_ht=scontent.flhe33-1.fna&oh=00_AfBd26674ua9LYQf6BB_EH3Gw_JMV7egQ22s0gEG8g9jmQ&oe=6598B26D",
+      logoUrl: "/assets/img/citilab.jpg",
       description:
         "Founded in 1989, Citi Lab and Research Centre offers high-quality diagnostics with a network of labs and collection points across Pakistan's provinces. Utilizing fully automated instruments, the lab provides over 1000 tests, excelling in molecular diagnostics and hematologic/histopathology cancers. Recognized with ISO 9001:2008 and ISO 15189:2015 certifications.",
       websiteUrl: "https://citilab.org.pk/",
     },
     {
       name: "CLIN LAB",
-      logoUrl:
-        "https://play-lh.googleusercontent.com/TtIYosDgTBCKACNQ627Wcibqtl80tjeA3KlBgeQErcBgOV_qDgF0fRmRJBfaBqHrDP4",
+      logoUrl: "/assets/img/clinlab.png",
       description:
         "Founded in 1984 in Lahore, Pakistan, CLINLAB, led by CEO Dr. Tauqeer Akhtar, offers advanced diagnostic services, including ultrasounds and HD-X-Ray. Renowned for its top-tier laboratory facilities and customer satisfaction, it operates near Jinnah Hospital and a new sample collection center at Multan Chungi, Wahdat Road, Lahore.",
       websiteUrl: "https://clinlab.pk/",
@@ -34,56 +31,49 @@ const Service = () => {
 
     {
       name: "Salman Chughtai's Lab",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/306794777_490507076422107_4144221721383890840_n.png?_nc_cat=107&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=LfhDb-fGDjoAX_1xKpy&_nc_ht=scontent.flhe33-1.fna&oh=00_AfALqAwjhz96XrMo3lpJ5_TRuGCJLmloLCgKz0hx5O4WHA&oe=659952B4",
+      logoUrl: "/assets/img/salman.png",
       description:
         "Established in 2008 by Salman Chughtai, Salman Chughtai's Lab provides diagnostic and research services with affordable, high-quality laboratory testing. Catering to diverse clientele, it operates 24/7, including weekends and holidays, staffed with healthcare professionals dedicated to patient services.",
       websiteUrl: "https://salmanchughtaislab.com/",
     },
     {
       name: "Metro City Lab",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/305236125_500139195450345_926124685532604470_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=lqEX6JOlNPoAX8_C-z4&_nc_ht=scontent.flhe33-1.fna&oh=00_AfBRce7uvep3YYynkmlEB4tcdAagpxKYbuet77gUHzTTNg&oe=6598A331",
+      logoUrl: "/assets/img/metro.jpg",
       description:
         "Metro City Lab (MCL) is the major corporate part of Maya Health Services (MHS) Private Limited and is a project of HC Pvt. Ltd., United Kingdom. Being a first-class pathology lab facility, we are committed to serving the community by providing high quality and accurate testing at affordable prices. We are dedicated to facilitating you best by providing quality services through an efficient network of collection centers in your near area and most importantly at your doorsteps.",
       websiteUrl: "https://www.metrocitylab.pk/",
     },
     {
       name: "Alpha Diagnostic Center",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/277739239_295286762727551_4256903776545592204_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=t1rH8qscxmUAX-_oFZw&_nc_ht=scontent.flhe33-1.fna&oh=00_AfB_adiAlpFpIUrOd5axe00erA1yizA6qY1i5_zl9S6kMA&oe=659888A1",
+      logoUrl: "/assets/img/alphaa.jpg",
       description:
         "Founded by Dr. Muhammad Hashim Khan, with extensive experience in radiology, Alpha Diagnostic Center in Lahore offers personalized, high-quality radiology and pathology services. Featuring state-of-the-art equipment, the center provides multiple services under one roof by consultants with over 15 years' experience, including affordable interventional radiology, ensuring swift and reliable results.",
       websiteUrl: "https://alphadc.com.pk/",
     },
     {
       name: "Al Razi Hospital Lab",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/366634123_716260820514095_5324572466782300243_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=vc-J0kkIPHwAX_o0lZO&_nc_ht=scontent.flhe33-1.fna&oh=00_AfBbKt0TQAaPpRdRNsvsf9Ro5RD5CmgsBJmtVe-5XxvlZw&oe=659996C9",
+      logoUrl: "/assets/img/al_razi.jpg",
       description:
         "AL-RAZI INTERNATIONAL LAB, equipped with cutting-edge technology, excels in Endocrinology, Hematology, Clinical Pathology, Molecular Biology, Microbiology, and Histopathology. It enhances client experience with web-based, SMS, and WhatsApp reporting, including free urgent reporting, and offers free home sample collection, continually evolving its high-quality services.",
       websiteUrl: "https://www.alrazilab.com/",
     },
     {
       name: "Innova Labs and Diagnostics",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/312880738_500766218730394_207109192581264250_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=x3ZpOiPWzSAAX_-uesg&_nc_ht=scontent.flhe33-1.fna&oh=00_AfBa70Gl5Jua4gEfwf00gMsTAXGq_-HLSpV8WaMrY3BmNA&oe=659A6201",
+      logoUrl: "/assets/img/innova.jpg",
       description:
         "Innova, equipped with advanced technology, specializes in Endocrinology, Hematology, Clinical Pathology, Molecular Biology, Microbiology, and Histopathology. It offers enhanced client services with web-based, SMS, WhatsApp reporting, and free urgent reporting options. Additionally, it provides free home sample collection, ensuring continuous evolution in its innovative diagnostic services.",
       websiteUrl: "https://innovalab.com.pk/",
     },
     {
       name: "NxGen Labs",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/230177211_153386510154131_990537456838497407_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=7_qzj4pQAwgAX8lqFT6&_nc_ht=scontent.flhe33-1.fna&oh=00_AfCso3G4k_wUY_wMHorUV8aqU6mPSkeI-OuwIc9utpk72w&oe=6598FAEE",
+      logoUrl: "/assets/img/nxgen.jpg",
       description:
         "Established in 2021, Waleed Tech's NxGen human testing lab offers state-of-the-art, error-free testing, targeting less privileged communities. Addressing chronic diseases, it provides high-quality, low-cost diagnostics. The lab's dedicated team of skilled professionals ensures quality service with strict quality control and assurance practices.",
       websiteUrl: "https://www.nxgenlabs.com.pk/",
     },
     {
       name: "Mughal Labs Diagnostics and Research",
-      logoUrl:
-        "https://scontent.flhe33-1.fna.fbcdn.net/v/t39.30808-6/378701470_609170964747395_6254953717038813312_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=FbKosz5trscAX8n31pN&_nc_ht=scontent.flhe33-1.fna&oh=00_AfA2gaR39yMifPJUF9fcLDSKnv6kvG81W3AXGScxyBZrRA&oe=659971EE",
+      logoUrl: "/assets/img/mughal.jpg",
       description:
         "Mughal Labs, established in February 2020 by Mughal Eye Hospital Trust, offers over 700 affordable, non-profit lab tests. Expanding with 25+ collection centers and 6 locations in Lahore for free medical OPD since August 2021, it aims to aid financially challenged patients and ensure early diagnosis.",
       websiteUrl: "https://mughallabs.com/",
