@@ -218,6 +218,11 @@ const DoctorDetails = () => {
                                         {item?.surgeries?.map((i) => i + ", ")}
                                       </p>
                                     </div>
+                                    {item.reports.map((item) => (
+                                      <>
+                                        <img src={item} />
+                                      </>
+                                    ))}
                                     {item?.zoomMeeting && (
                                       <h4 style={{ paddingTop: "16px" }}>
                                         Zoom Meeting:{" "}
