@@ -230,6 +230,7 @@ const DoctorDetails = () => {
                                         </a>
                                       </h4>
                                     )}
+
                                     {/* Include other data fields as needed */}
                                   </Card.Body>
                                 </Accordion.Collapse>
@@ -305,6 +306,11 @@ const DoctorDetails = () => {
                                         {item?.surgeries?.map((i) => i + ", ")}
                                       </p>
                                     </div>
+                                    {item.reports.map((item) => (
+                                      <>
+                                        <img src={item} />
+                                      </>
+                                    ))}
                                     {item?.zoomMeeting && (
                                       <h4 style={{ paddingTop: "16px" }}>
                                         Zoom Meeting:{" "}
@@ -317,6 +323,29 @@ const DoctorDetails = () => {
                                         </a>
                                       </h4>
                                     )}
+                                    <div
+                                      className="login-btns"
+                                      style={{ width: "fit-content" }}
+                                    >
+                                      <button
+                                        type="button"
+                                        style={{
+                                          backgroundColor: "red",
+                                          pointerEvents: item.isValid
+                                            ? "auto"
+                                            : "none",
+                                        }}
+                                        className="template-btn text-center template-btn-primary mt-sm-30 wow fadeInRight"
+                                        data-wow-delay="0.3s"
+                                        onClick={() => onCancel(item._id)}
+                                      >
+                                        {item.isValid ? (
+                                          <>Cancel</>
+                                        ) : (
+                                          <>Canceled</>
+                                        )}
+                                      </button>
+                                    </div>
                                     {/* Include other data fields as needed */}
                                   </Card.Body>
                                 </Accordion.Collapse>

@@ -82,17 +82,52 @@ const Appointments = () => {
       });
   };
 
+  const [files, setFiles] = useState([]);
+
+  const handleFileChange = (e) => {
+    setFiles(Array.from(e.target.files));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      ...credentials,
-      user: userInfo?._id,
-      medicalConditions: selectedOptions.map((item) => item.value),
-      currentMedications: medication.map((item) => item.value),
-      medicalTests: medicalTests.map((item) => item.value),
-      surgeries: surgeries.map((item) => item.value),
-    };
-    ApiPost("/bookings/create", data)
+
+    const formData = new FormData();
+    // Append each file to formData
+    files.forEach((file, index) => {
+      formData.append("files", file);
+    });
+
+    // Append each property of the credentials object to formData
+    for (const key in credentials) {
+      if (credentials.hasOwnProperty(key)) {
+        formData.append(key, credentials[key]);
+      }
+    }
+
+    // Append other data to formData
+    formData.append("user", userInfo?._id);
+    formData.append(
+      "medicalConditions",
+      selectedOptions.map((item) => item.value)
+    );
+    formData.append(
+      "currentMedications",
+      medication.map((item) => item.value)
+    );
+    formData.append(
+      "medicalTests",
+      medicalTests.map((item) => item.value)
+    );
+    formData.append(
+      "surgeries",
+      surgeries.map((item) => item.value)
+    );
+
+    ApiPost("/bookings/create", formData, {
+      headers: {
+        // Content-Type is set automatically by the browser when using FormData
+      },
+    })
       .then((res) => {
         toast.success("Appointment Created");
       })
@@ -300,7 +335,12 @@ const Appointments = () => {
                       />
                     </div>
                   </div>
-
+                  <input
+                    style={{ backgroundColor: "transparent" }}
+                    type="file"
+                    multiple
+                    onChange={handleFileChange}
+                  />
                   <div className="col-md-6">
                     <div className="input-field">
                       <button type="submit" className="template-btn">
